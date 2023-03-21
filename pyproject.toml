@@ -28,19 +28,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.black]
 line-length = 92
 target-version = ['py310']
-exclude = '''
-/(
-    \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | ^.*\b(migrations)\b.*$
-)/
-'''
+exclude = '.*/migrations/.*'
 
 [tool.ruff]
 line-length = 100
