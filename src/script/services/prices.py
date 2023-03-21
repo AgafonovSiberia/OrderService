@@ -1,33 +1,23 @@
-from datetime import datetime, date
 
 from src.script.tools.google_api import get_worksheet
-from pydantic import BaseModel, Field, validator
+from src.script.schemas import Record
+from src.script.tools.current_rate import get_rate
+
 
 WORKSHEET_ID = 0
 
 
-class Record(BaseModel):
-    id: int = Field(alias="№")
-    number: int = Field(alias="заказ №")
-    price_by_dollar: int = Field(alias="стоимость,$")
-    delivery_date: date = Field(alias="срок поставки")
-
-    @validator("delivery_date", pre=True)
-    def parse_date(cls, value):
-        return datetime.strptime(value, "%d.%m.%Y").date()
-
-
-def get_records_from_sheets() -> list[list]:
+def get_records_from_sheets() -> list[Record]:
     """
-    Получает все записи из GoogleSheet
-    :return: list[list]
+    Получает все записи из GoogleSheet, приводит к list[object Record]
+    :return: list[Record]
+
+    !! Надо обрабатывать ошибки гугла (смотреть лимиты)
     """
     ws = get_worksheet(WORKSHEET_ID)
     values_list = ws.get_all_records()
-    for value_row in values_list:
-        #print(value_row)
-        print(Record(**value_row))
-
+    list_records: list[Record] = [Record(**record_row) for record_row in values_list]
+    return list_records
 
 
 def update_price_to_database():
@@ -39,7 +29,9 @@ def price_to_rub():
 
 
 def get_rate_ruble():
-    pass
+    print(get_rate())
+
+
 
 
 

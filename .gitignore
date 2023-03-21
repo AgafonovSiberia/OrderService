@@ -1,7 +1,7 @@
 ## Credetials files project
 .dev.env
 cred.json
-
+./cred.json
 
 ### VisualStudioCode template
 .vscode/*
@@ -710,6 +710,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+!/cred.json
 !/cred.json
 !/cred.json
 !/cred.json
