@@ -1,6 +1,7 @@
 from typing import Optional, Any, Dict
 from pydantic import BaseModel, BaseSettings, Field, PostgresDsn, RedisDsn, validator
 
+
 class ServiceKey(BaseModel):
     type: str
     project_id: str
@@ -14,7 +15,7 @@ class ServiceKey(BaseModel):
 
 
 class Settings(BaseSettings):
-    API_V1_URL: str = "/api/v1"
+    API_V1_URL: str
 
     GSAPI_ID: str
     GSAPI_SERVICE_KEY: ServiceKey
@@ -57,7 +58,7 @@ class Settings(BaseSettings):
         )
 
     class Config:
-        env_file = "./dev.env"
+        env_file = "../../.dev.env"
         env_file_encoding = "utf-8"
         env_nested_delimiter = "__"
 
