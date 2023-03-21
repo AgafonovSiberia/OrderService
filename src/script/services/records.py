@@ -1,8 +1,9 @@
 from src.script.tools.google_api import get_worksheet
 from src.script.schemas import RecordSchema
 from src.script.tools.current_rate import get_current_rate_from_api
-from src.infrastucture.db.factory import create_pool
 from src.infrastucture.repo.record import RecordRepo
+from src.infrastucture.repo.base import get_base_repo
+from sqlalchemy.orm.session import sessionmaker
 
 WORKSHEET_ID = 0
 
@@ -22,13 +23,11 @@ def get_records_from_sheets() -> list[RecordSchema]:
     return list_records
 
 
-def update_record_to_database():
+def update_record_to_database(pool: sessionmaker):
     list_records: list[RecordSchema] = get_records_from_sheets()
     current_rate = get_rate_usb_to_rub()
-
-    pool = create_pool()
-    with pool() as session:
-        repo = RecordRepo(session)
+    with pool() as _session:
+        repo = get_base_repo(_session).get_repo(RecordRepo)
         for record in list_records:
             repo.add_record(record, current_rate)
 

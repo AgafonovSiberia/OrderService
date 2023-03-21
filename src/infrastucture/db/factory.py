@@ -1,6 +1,5 @@
 from src.config_reader import config
 
-
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine import Engine
 from sqlalchemy import create_engine

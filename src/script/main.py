@@ -1,11 +1,16 @@
+import time
+
 from src.script.services.records import update_record_to_database
+from src.infrastucture.db.factory import create_pool
+from sqlalchemy.orm.session import sessionmaker
 
 
-def start_script():
+def start_script(sessions_pool: sessionmaker):
     while True:
-        ...
-        # update_prices()
+        update_record_to_database(pool=sessions_pool)
+        time.sleep(1.1)
 
 
 if __name__ == "__main__":
-    update_record_to_database()
+    pool = create_pool()
+    start_script(sessions_pool=pool)

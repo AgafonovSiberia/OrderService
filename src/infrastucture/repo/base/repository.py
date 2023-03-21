@@ -1,4 +1,4 @@
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 from functools import lru_cache
 from typing import Type, TypeVar
 
@@ -8,8 +8,12 @@ from src.infrastucture.repo.base.base import BaseSQLAlchemyRepo
 T = TypeVar("T", bound=BaseSQLAlchemyRepo)
 
 
+def get_base_repo(session):
+    return SQLALchemyRepo(session)
+
+
 class SQLALchemyRepo:
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session: Session):
         self._session = session
 
     @lru_cache()
