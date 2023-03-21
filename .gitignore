@@ -1,7 +1,10 @@
 ## Credetials files project
-.dev.env
+dev.env
 cred.json
 ./cred.json
+./.ruff_cache
+.ruff_cache/*
+
 
 ### VisualStudioCode template
 .vscode/*
@@ -714,3 +717,4 @@ cython_debug/
 !/cred.json
 !/cred.json
 !/cred.json
+!/.ruff_cache/
