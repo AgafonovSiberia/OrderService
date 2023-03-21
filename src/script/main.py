@@ -1,3 +1,6 @@
+from src.script.services.records import update_record_to_database
+
+
 def start_script():
     while True:
         ...
@@ -5,5 +8,4 @@ def start_script():
 
 
 if __name__ == "__main__":
-    while True:
-        print("Hello world!")
+    update_record_to_database()

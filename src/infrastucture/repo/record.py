@@ -5,8 +5,8 @@ from src.infrastucture.repo.base.base import BaseSQLAlchemyRepo
 
 
 class RecordRepo(BaseSQLAlchemyRepo):
-    async def add_record(self, record: RecordSchema, rate: Decimal):
-        record = await self._session.merge(
+    def add_record(self, record: RecordSchema, rate: Decimal):
+        record = self._session.merge(
             Record(
                 order_number=record.order_number,
                 price_in_dollars=record.price_in_dollars,
@@ -15,5 +15,5 @@ class RecordRepo(BaseSQLAlchemyRepo):
             )
         )
 
-        await self._session.commit()
+        self._session.commit()
         return record

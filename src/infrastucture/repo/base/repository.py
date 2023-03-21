@@ -16,8 +16,8 @@ class SQLALchemyRepo:
     def get_repo(self, repo: Type[T]) -> T:
         return repo(self._session)
 
-    async def commit(self):
-        await self._session.commit()
+    def commit(self):
+        self._session.commit()
 
-    async def rollback(self):
-        await self._session.rollback()
+    def rollback(self):
+        self._session.rollback()
