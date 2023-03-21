@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "price-service"
+version = "0.1.0"
+description = ""
+authors = ["AgafonovSiberia <agafonov@chita.ru>"]
+readme = "README.md"
+packages = [{include = "price_service"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+ruff = "^0.0.257"
+pyright = "^1.1.299"
+pre-commit = "^3.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
