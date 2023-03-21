@@ -5,4 +5,5 @@ def start_script():
 
 
 if __name__ == "__main__":
-    print("Hello world!")
+    while True:
+        print("Hello world!")
