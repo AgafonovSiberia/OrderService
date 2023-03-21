@@ -8,6 +8,10 @@ packages = [{include = "price_service"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+alembic = "^1.10.2"
+pydantic = "^1.10.6"
+sqlalchemy = "^2.0.7"
+gspread = "^5.7.2"
 
 
 [tool.poetry.group.dev.dependencies]
