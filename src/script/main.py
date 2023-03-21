@@ -4,13 +4,15 @@ from src.script.services.records import update_record_to_database
 from src.infrastucture.db.factory import create_pool
 from sqlalchemy.orm.session import sessionmaker
 
+GOOGLE_API_TIMEOUT = 1.1
 
-def start_script(sessions_pool: sessionmaker):
+
+def script_run():
+    pool: sessionmaker = create_pool()
     while True:
-        update_record_to_database(pool=sessions_pool)
-        time.sleep(1.1)
+        update_record_to_database(pool=pool)
+        time.sleep(GOOGLE_API_TIMEOUT)
 
 
 if __name__ == "__main__":
-    pool = create_pool()
-    start_script(sessions_pool=pool)
+    script_run()

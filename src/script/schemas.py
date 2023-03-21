@@ -4,7 +4,7 @@ from decimal import Decimal
 
 
 class RecordSchema(BaseModel):
-    id: int = Field(alias="№")
+    # id: int = Field(alias="№")
     order_number: int = Field(alias="заказ №")
     price_in_dollars: Decimal = Field(alias="стоимость,$")
     delivery_date: date = Field(alias="срок поставки")
