@@ -5,6 +5,7 @@ from src.infrastucture.repo.record_repo import RecordRepo
 
 from src.infrastucture.repo.base.repository import get_base_repo
 from sqlalchemy.orm.session import sessionmaker
+from sqlalchemy import event
 
 WORKSHEET_ID = 0
 
@@ -34,6 +35,11 @@ def update_record_to_database(pool: sessionmaker) -> None:
     current_rate = get_current_rate_from_api()
 
     with pool() as _session:
+        event.listen(_session, "after_commit", receive_after_flush)
+
         repo = get_base_repo(_session).get_repo(RecordRepo)
-        for record in list_records:
-            repo.add_record(record, current_rate)
+        repo.add_records(records_list=list_records, rate=current_rate)
+
+
+def receive_after_flush(session):
+    print("Тут дернем вебсокет для реакта")

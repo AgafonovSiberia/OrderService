@@ -37,18 +37,28 @@ class RecordRepo(BaseSQLAlchemyRepo):
         self._session.commit()
         return record
 
-    # upser multi rows
-    # def add_records(self, records_list: list[RecordSchema], rate: Decimal):
-    #     ins = insert(Record).values(records_list)
-    #
-    #     exclude_for_update = [Record.id.name, "order_number", "price_in_rubles"]
-    #
-    #     update_dict = {c.name: c for c in ins.excluded if c.name not in exclude_for_update}
-    #     print(f"Dict: {update_dict}")
-    #
-    #     query = ins.on_conflict_do_update(
-    #         index_elements=["order_number"],
-    #         set_=update_dict)
-    #
-    #     self._session.execute(query)
-    #     self._session.commit()
+    # upset multi rows
+    def add_records(self, records_list: list[RecordSchema], rate: Decimal):
+        prepare_data = [
+            dict(
+                order_number=record.order_number,
+                price_in_dollars=record.price_in_dollars,
+                price_in_rubles=record.price_in_dollars * rate,
+                delivery_date=record.delivery_date,
+            )
+            for record in records_list
+        ]
+
+        ins = insert(Record).values(prepare_data)
+
+        query = ins.on_conflict_do_update(
+            index_elements=["order_number"],
+            set_={
+                "price_in_dollars": ins.excluded.price_in_dollars,
+                "price_in_rubles": ins.excluded.price_in_rubles,
+                "delivery_date": ins.excluded.delivery_date,
+            },
+        )
+
+        self._session.execute(query)
+        self._session.commit()
