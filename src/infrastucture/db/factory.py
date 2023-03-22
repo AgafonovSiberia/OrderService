@@ -18,7 +18,7 @@ from sqlalchemy import create_engine
 
 
 def create_pool():
-    engine = create_engine(config.POSTGRES_URL, pool_pre_ping=True, echo=True)
+    engine = create_engine(config.POSTGRES_URL, pool_pre_ping=True, echo=False)
     return create_session_maker(engine)
 
 
