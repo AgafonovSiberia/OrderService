@@ -7,7 +7,6 @@ from src.script.services.current_rate import get_current_rate_from_api
 class RecordSchema(BaseModel):
     order_number: int = Field(alias="заказ №")
     price_in_dollars: Decimal = Field(alias="стоимость,$")
-    price_in_rubles: Decimal = Field(alias="стоимость,$")
     delivery_date: date = Field(alias="срок поставки")
 
     @validator("delivery_date", pre=True)
