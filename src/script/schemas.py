@@ -4,7 +4,7 @@ from decimal import Decimal
 from src.script.services.current_rate import get_current_rate_from_api
 
 
-class RecordSchema(BaseModel):
+class OrderSchema(BaseModel):
     order_number: int = Field(alias="заказ №")
     price_in_dollars: Decimal = Field(alias="стоимость,$")
     delivery_date: datetime.date = Field(alias="срок поставки")
@@ -14,7 +14,7 @@ class RecordSchema(BaseModel):
         return datetime.datetime.strptime(value, "%d.%m.%Y").date()
 
 
-class RecordFullSchema(RecordSchema):
+class OrderFullSchema(OrderSchema):
     price_in_rubles: Decimal = Field(alias="стоимость,$")
 
     @validator("price_in_rubles", pre=True)

@@ -8,6 +8,7 @@ class ServiceKey(BaseModel):
     private_key_id: str
     private_key: str
     client_email: str
+    client_id: str
     auth_uri: str
     token_uri: str
     auth_provider_x509_cert_url: str
@@ -15,7 +16,7 @@ class ServiceKey(BaseModel):
 
 
 class Settings(BaseSettings):
-    API_V1_URL: str
+    API_V1_URL: str = Field(default="/api_v1/")
 
     GSAPI_ID: str
     GSAPI_SERVICE_KEY: ServiceKey
@@ -58,7 +59,7 @@ class Settings(BaseSettings):
         )
 
     class Config:
-        env_file = "../../dev.env"
+        env_file = "./dev.env"
         env_file_encoding = "utf-8"
         env_nested_delimiter = "__"
 

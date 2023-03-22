@@ -1,8 +1,8 @@
 from gspread import Worksheet
 
-from src.script.schemas import RecordSchema, RecordFullSchema
+from src.script.schemas import OrderSchema, OrderFullSchema
 from src.script.services.current_rate import get_current_rate_from_api
-from src.infrastucture.repo.record_repo import RecordRepo
+from src.infrastucture.repo.orders import OrderRepo
 from src.script.services.google_api import get_worksheet
 from src.infrastucture.repo.base.repository import get_base_repo
 from sqlalchemy import event
@@ -14,35 +14,35 @@ WORKSHEET_ID = 0
 
 
 @timeit
-def get_records_from_sheets() -> list[RecordFullSchema]:
+def get_orders_from_sheets() -> list[OrderFullSchema]:
     """
-    Получает все записи из GoogleSheet, приводит к list[PydanticModel - RecordSchema]
-    :return: list[RecordSchema]
+    Получает все записи из GoogleSheet, приводит к list[PydanticModel - OrderSchema]
+    :return: list[OrderSchema]
     """
 
     sheet: Worksheet = get_worksheet(WORKSHEET_ID)
     values_list = sheet.get_all_records()
 
-    list_records: list[RecordFullSchema] = [
-        RecordFullSchema(**record_row) for record_row in values_list
+    list_orders: list[OrderFullSchema] = [
+        OrderFullSchema(**record_row) for record_row in values_list
     ]
-    return list_records
+    return list_orders
 
 
 @timeit
-def update_record_to_database(pool) -> None:
+def update_orders_to_database(pool) -> None:
     """
     Обновляет записи в БД.
     Считает значение для поля цена в рублях.
     :param pool: Пул соединений с БД
     """
-    list_records: list[RecordSchema] = get_records_from_sheets()
+    list_orders: list[OrderSchema] = get_orders_from_sheets()
     current_rate = get_current_rate_from_api()
 
     with pool() as _session:
         event.listen(_session, "after_commit", receive_after_flush)
-        repo = get_base_repo(_session).get_repo(RecordRepo)
-        repo.add_records(records_list=list_records, rate=current_rate)
+        repo = get_base_repo(_session).get_repo(OrderRepo)
+        repo.add_orders(orders_list=list_orders, rate=current_rate)
 
 
 def receive_after_flush(session):

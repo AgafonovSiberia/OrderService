@@ -1,16 +1,16 @@
 from decimal import Decimal
 from sqlalchemy.dialects.postgresql import insert
 
-from src.script.schemas import RecordFullSchema
-from src.infrastucture.db.models import Record
+from src.script.schemas import OrderFullSchema
+from src.infrastucture.db.models import Orders
 from src.infrastucture.repo.base.base import BaseSQLAlchemyRepo
 
 
-class RecordRepo(BaseSQLAlchemyRepo):
+class OrderRepo(BaseSQLAlchemyRepo):
     # upsert multi rows
-    def add_records(self, records_list: list[RecordFullSchema], rate: Decimal):
-        prepare_data = [record.dict() for record in records_list]
-        ins = insert(Record).values(prepare_data)
+    def add_orders(self, orders_list: list[OrderFullSchema]):
+        prepare_data = [record.dict() for record in orders_list]
+        ins = insert(Orders).values(prepare_data)
 
         query = ins.on_conflict_do_update(
             index_elements=["order_number"],
