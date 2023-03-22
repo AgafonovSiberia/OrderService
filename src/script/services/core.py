@@ -1,4 +1,6 @@
-from src.script.schemas import RecordSchema
+from gspread import Worksheet
+
+from src.script.schemas import RecordSchema, RecordFullSchema
 from src.script.services.current_rate import get_current_rate_from_api
 from src.infrastucture.repo.record_repo import RecordRepo
 from src.script.services.google_api import get_worksheet
@@ -12,17 +14,17 @@ WORKSHEET_ID = 0
 
 
 @timeit
-def get_records_from_sheets() -> list[RecordSchema]:
+def get_records_from_sheets() -> list[RecordFullSchema]:
     """
-    Получает все записи из GoogleSheet, приводит к list[object Record]
-    :return: list[Record]
+    Получает все записи из GoogleSheet, приводит к list[PydanticModel - RecordSchema]
+    :return: list[RecordSchema]
     """
 
-    ws = get_worksheet(WORKSHEET_ID)
-    values_list = ws.get_all_records()
+    sheet: Worksheet = get_worksheet(WORKSHEET_ID)
+    values_list = sheet.get_all_records()
 
-    list_records: list[RecordSchema] = [
-        RecordSchema(**record_row) for record_row in values_list
+    list_records: list[RecordFullSchema] = [
+        RecordFullSchema(**record_row) for record_row in values_list
     ]
     return list_records
 
@@ -30,7 +32,7 @@ def get_records_from_sheets() -> list[RecordSchema]:
 @timeit
 def update_record_to_database(pool) -> None:
     """
-    Обновляет записи из GoogleSheet в БД.
+    Обновляет записи в БД.
     Считает значение для поля цена в рублях.
     :param pool: Пул соединений с БД
     """

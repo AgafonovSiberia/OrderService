@@ -4,11 +4,12 @@ from src.infrastucture.db.factory import create_pool
 from sqlalchemy.orm.session import sessionmaker
 from src.logger import logger
 
+# Quota limits to GoogleSheets APi. Per minute per user per project - 60
 GOOGLE_API_TIMEOUT = 2
 
 
 def script_run():
-    logger.info("Start script")
+    logger.info("Script started")
     pool: sessionmaker = create_pool()
 
     while True:
