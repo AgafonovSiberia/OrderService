@@ -46,5 +46,5 @@ def update_record_to_database(pool) -> None:
 
 
 def receive_after_flush(session):
-    # тут будем дергать вебсокет для реакта
+    # тут можно дёргать вебсокет для реакта
     logger.info("Session committed")

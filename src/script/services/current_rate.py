@@ -24,13 +24,14 @@ def get_current_rate_from_api(
     if result.status_code == 200:
         root = fromstring(result.text).find(f"Valute[@ID='{USD_CODE}']")
         rate = root.find("Value")
+
         logger.info(f"От ЦБ РФ получен курс валют на {date}. Курс USD-RUB: {rate.text}")
         return convert_rate_to_decimal(rate=rate)
 
     logger.error(
         f"Не удалось получить актуальный курс валют от ЦБ РФ на {date}. {result.status_code}"
     )
-    return Decimal("1")
+    return get_current_rate_from_api.__wrapped__()
 
 
 def convert_rate_to_decimal(rate: str):
