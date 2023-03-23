@@ -1,6 +1,6 @@
 import gspread
 
-from src.config_reader import config
+from app.config_reader import config
 from gspread.client import BackoffClient
 from gspread.auth import ServiceAccountCredentials, DEFAULT_SCOPES
 from functools import lru_cache

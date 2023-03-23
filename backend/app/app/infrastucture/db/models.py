@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, Date, DECIMAL, BigInteger
-from src.infrastucture.db.base import Base
+from app.infrastucture.db.base import Base
 
 
 class Orders(Base):

@@ -1,14 +1,14 @@
 from gspread import Worksheet
 
-from src.script.schemas import OrderSchema, OrderFullSchema
-from src.script.services.current_rate import get_current_rate_from_api
-from src.infrastucture.repo.orders import OrderRepo
-from src.script.services.google_api import get_worksheet
-from src.infrastucture.repo.base.repository import get_base_repo
+from app.services.schemas import OrderSchema, OrderFullSchema
+from app.services.current_rate import get_current_rate_from_api
+from app.infrastucture.repo.orders import OrderRepo
+from app.services.google_api import get_worksheet
+from app.infrastucture.repo.base.repository import get_base_repo
 from sqlalchemy import event
 
-from src.logger import logger
-from src.utils import timeit
+from app.logger import logger
+from app.utils import timeit
 
 WORKSHEET_ID = 0
 

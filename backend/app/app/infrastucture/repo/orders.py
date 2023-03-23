@@ -1,9 +1,8 @@
-from decimal import Decimal
 from sqlalchemy.dialects.postgresql import insert
 
-from src.script.schemas import OrderFullSchema
-from src.infrastucture.db.models import Orders
-from src.infrastucture.repo.base.base import BaseSQLAlchemyRepo
+from app.services.schemas import OrderFullSchema
+from app.infrastucture.db.models import Orders
+from app.infrastucture.repo.base.base import BaseSQLAlchemyRepo
 
 
 class OrderRepo(BaseSQLAlchemyRepo):

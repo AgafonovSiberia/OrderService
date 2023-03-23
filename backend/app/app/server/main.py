@@ -1,6 +1,6 @@
-# from flask import FlaskAPP
+# from server import FlaskAPP
 def main():
-    # app = FlaskApp()
+    # server = FlaskApp()
     ...
 
 

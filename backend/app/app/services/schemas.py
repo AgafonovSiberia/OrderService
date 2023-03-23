@@ -1,7 +1,7 @@
 import datetime
 from pydantic import BaseModel, Field, validator
 from decimal import Decimal
-from src.script.services.current_rate import get_current_rate_from_api
+from app.services.current_rate import get_current_rate_from_api
 
 
 class OrderSchema(BaseModel):

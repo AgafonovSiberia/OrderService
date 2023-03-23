@@ -1,4 +1,4 @@
-from src.logger import logger
+from app.logger import logger
 import time
 from datetime import timedelta
 

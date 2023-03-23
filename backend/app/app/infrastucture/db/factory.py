@@ -1,4 +1,4 @@
-from src.config_reader import config
+from app.config_reader import config
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine import Engine

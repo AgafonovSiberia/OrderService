@@ -5,9 +5,9 @@ services:
     image: script
     build:
       context: .
-      dockerfile: script.Dockerfile
+      dockerfile: backend/script.Dockerfile
     volumes:
-      - .:/src
+      - ./backend/app:/app
     ports:
       - "9090:9090"
     restart: always
@@ -24,7 +24,7 @@ services:
     command: postgres -c config_file=/etc/postgresql.conf
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-      - ./postgres/postgresql.conf:/etc/postgresql.conf
+      - ./backend/postgres/postgresql.conf:/etc/postgresql.conf
     env_file:
       - dev.env
     ports:

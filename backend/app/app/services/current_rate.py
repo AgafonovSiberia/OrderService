@@ -4,7 +4,7 @@ import requests
 from decimal import Decimal
 from xml.etree.ElementTree import fromstring
 from functools import lru_cache
-from src.logger import logger
+from app.logger import logger
 
 USD_CODE = "R01235"
 URL_API = "https://www.cbr.ru/scripts/XML_daily.asp"

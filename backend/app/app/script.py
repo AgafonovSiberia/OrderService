@@ -1,8 +1,8 @@
 import time
-from src.script.services.core import update_orders_to_database
-from src.infrastucture.db.factory import create_pool
+from app.services.core import update_orders_to_database
+from app.infrastucture.db.factory import create_pool
 from sqlalchemy.orm.session import sessionmaker
-from src.logger import logger
+from app.logger import logger
 
 # Quota limits to GoogleSheets APi. Per minute per user per project - 60
 GOOGLE_API_TIMEOUT = 2
