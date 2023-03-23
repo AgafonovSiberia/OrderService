@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, Date, DECIMAL, BigInteger
 from app.infrastucture.db.base import Base
 
 
-class Orders(Base):
+class Order(Base):
     __tablename__ = "orders"
     id = Column(Integer, primary_key=True)
     order_number = Column(BigInteger, nullable=False, unique=True)

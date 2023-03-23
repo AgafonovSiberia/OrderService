@@ -1,0 +1,88 @@
+version: "3.8"
+
+services:
+  app:
+    image: src
+    build:
+      context: .
+      dockerfile: backend/backend.Dockerfile
+    volumes:
+      - ./backend/app:/app
+    ports:
+      - "9090:9090"
+    restart: always
+    env_file:
+      - dev.env
+    depends_on:
+      - db
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  db:
+    image: postgres:15.1
+    command: postgres -c config_file=/etc/postgresql.conf
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./backend/postgres/postgresql.conf:/etc/postgresql.conf
+    env_file:
+      - dev.env
+    ports:
+      - "6666:5432"
+    restart: always
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+
+
+  celery:
+    restart: always
+    image: app
+    build:
+      context: .
+    command: celery -A app.infrastructure.workflow.celery worker -l info
+    volumes:
+      - .:/usr/app/app
+    env_file:
+      - dev.env
+    depends_on:
+      - db
+      - redis
+
+
+  celery_beat:
+    restart: always
+    image: app
+    build:
+      context: .
+    command: celery -A app.infrastructure.workflow.celery beat -l info
+    volumes:
+      - .:/usr/app/app
+    env_file:
+      - dev.env
+    depends_on:
+      - db
+      - redis
+      - celery
+
+  dashboard:
+    build:
+      context: .
+    command: celery --broker=redis://redis:6379/0 flower --port=5555 --address=0.0.0.0
+    expose:
+      - 5555
+    env_file:
+      - dev.env
+    ports:
+      - 5555:5555
+    depends_on:
+      - web
+      - redis
+      - celery
+
+
+volumes:
+  postgres_data:

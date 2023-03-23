@@ -1,15 +1,17 @@
 from sqlalchemy.dialects.postgresql import insert
 
 from app.services.schemas import OrderFullSchema
-from app.infrastucture.db.models import Orders
+from app.infrastucture.db.models import Order
 from app.infrastucture.repo.base.base import BaseSQLAlchemyRepo
+
+from sqlalchemy import select
 
 
 class OrderRepo(BaseSQLAlchemyRepo):
     # upsert multi rows
     def add_orders(self, orders_list: list[OrderFullSchema]):
         prepare_data = [record.dict() for record in orders_list]
-        ins = insert(Orders).values(prepare_data)
+        ins = insert(Order).values(prepare_data)
 
         query = ins.on_conflict_do_update(
             index_elements=["order_number"],
@@ -22,3 +24,7 @@ class OrderRepo(BaseSQLAlchemyRepo):
 
         self._session.execute(query)
         self._session.commit()
+
+    def get_orders(self):
+        orders = self._session.execute(select(Order))
+        return orders.scalars().all()
