@@ -1,6 +1,6 @@
 from flask import Flask
 from sqlalchemy.orm import sessionmaker
-from app.infrastucture.repo.base.repository import SQLALchemyRepo
+from app.infrastructure.repo.base.repository import SQLALchemyRepo
 
 
 class Repository:

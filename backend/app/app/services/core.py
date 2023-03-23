@@ -2,9 +2,9 @@ from gspread import Worksheet
 
 from app.services.schemas import OrderSchema, OrderFullSchema
 from app.services.current_rate import get_current_rate_from_api
-from app.infrastucture.repo.orders import OrderRepo
+from app.infrastructure.repo.orders import OrderRepo
 from app.services.google_api import get_worksheet
-from app.infrastucture.repo.base.repository import get_base_repo
+from app.infrastructure.repo.base.repository import get_base_repo
 from sqlalchemy import event
 
 from app.logger import logger
@@ -42,7 +42,7 @@ def update_orders_to_database(pool) -> None:
     with pool() as _session:
         event.listen(_session, "after_commit", receive_after_flush)
         repo = get_base_repo(_session).get_repo(OrderRepo)
-        repo.add_orders(orders_list=list_orders, rate=current_rate)
+        repo.add_orders(orders_list=list_orders)
 
 
 def receive_after_flush(session):

@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from functools import lru_cache
 from typing import Type, TypeVar
 
-from app.infrastucture.repo.base.base import BaseSQLAlchemyRepo
+from app.infrastructure.repo.base.base import BaseSQLAlchemyRepo
 
 
 T = TypeVar("T", bound=BaseSQLAlchemyRepo)

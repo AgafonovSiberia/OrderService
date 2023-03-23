@@ -2,10 +2,11 @@ version: "3.8"
 
 services:
   app:
-    image: src
+    image: app
     build:
       context: .
-      dockerfile: backend/backend.Dockerfile
+      dockerfile: backend/app.dockerfile
+    command: bash -c "alembic upgrade head && python -m app.main"
     volumes:
       - ./backend/app:/app
     ports:
@@ -37,15 +38,14 @@ services:
     ports:
       - '6379:6379'
 
-
   celery:
     restart: always
     image: app
     build:
-      context: .
+      context: ./backend/app
     command: celery -A app.infrastructure.workflow.celery worker -l info
     volumes:
-      - .:/usr/app/app
+     - .:/usr/bot/app
     env_file:
       - dev.env
     depends_on:
@@ -57,10 +57,10 @@ services:
     restart: always
     image: app
     build:
-      context: .
+      context: ./backend/app
     command: celery -A app.infrastructure.workflow.celery beat -l info
     volumes:
-      - .:/usr/app/app
+      - .:/usr/bot/app
     env_file:
       - dev.env
     depends_on:
@@ -69,6 +69,7 @@ services:
       - celery
 
   dashboard:
+    image: app
     build:
       context: .
     command: celery --broker=redis://redis:6379/0 flower --port=5555 --address=0.0.0.0
@@ -77,7 +78,7 @@ services:
     env_file:
       - dev.env
     ports:
-      - 5555:5555
+      - "5555:5555"
     depends_on:
       - web
       - redis

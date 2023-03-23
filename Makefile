@@ -13,3 +13,4 @@ stop_base:
 
 clear_data:
 	docker compose -f docker-compose.base.yaml down -v
+	docker compose -f docker-compose.app.yaml down -v

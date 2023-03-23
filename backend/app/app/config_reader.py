@@ -18,7 +18,7 @@ class ServiceKey(BaseModel):
 class Settings(BaseSettings):
     API_V1_URL: str = Field(default="/api_v1/")
     UPDATE_TIMEOUT: int = Field(default=10)
-
+    TIMEZONE: str = Field(default="Europe/Moscow")
     GSAPI_ID: str
     GSAPI_SERVICE_KEY: ServiceKey
 

@@ -1,6 +1,6 @@
 import time
 from app.services.core import update_orders_to_database
-from app.infrastucture.db.factory import create_pool
+from app.infrastructure.db.factory import create_pool
 from sqlalchemy.orm.session import sessionmaker
 from app.logger import logger
 

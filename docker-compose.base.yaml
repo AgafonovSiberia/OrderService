@@ -5,7 +5,7 @@ services:
     image: script
     build:
       context: .
-      dockerfile: backend/script.Dockerfile
+      dockerfile: backend/script.dockerfile
     volumes:
       - ./backend/app:/app
     ports:

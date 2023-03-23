@@ -18,4 +18,4 @@ WORKDIR $CODE_PATH
 
 COPY ./backend/app .
 
-ENTRYPOINT ["python3", "-m", "app.main"]
+#ENTRYPOINT ["python3", "-m", "app.main"]

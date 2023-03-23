@@ -1,7 +1,7 @@
-from app.infrastucture.workflow.celery import celery
+from app.infrastructure.workflow.celery import celery
 from app.services.core import update_orders_to_database
 from sqlalchemy.orm import sessionmaker
-from app.infrastucture.db.factory import create_pool
+from app.infrastructure.db.factory import create_pool
 
 
 @celery.task

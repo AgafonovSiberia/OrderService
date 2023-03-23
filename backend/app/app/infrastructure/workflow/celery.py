@@ -6,8 +6,8 @@ from app.config_reader import config
 celery = Celery("web",
                 broker=config.REDIS_URL,
                 backend=config.REDIS_URL,
-                include=["bot.service.workflow.tasks.periodic_tasks"
-                         ])
+                include=["app.infrastructure.workflow.tasks.periodic",
+                         "app.infrastructure.workflow.tasks.script_task"])
 
 
 class CeleryConfig:

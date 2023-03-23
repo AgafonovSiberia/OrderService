@@ -31,7 +31,7 @@ def get_current_rate_from_api(
     logger.error(
         f"Не удалось получить актуальный курс валют от ЦБ РФ на {date}. {result.status_code}"
     )
-    return get_current_rate_from_api.__wrapped__()
+    return None
 
 
 def convert_rate_to_decimal(rate: str):
