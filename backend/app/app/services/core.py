@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from app.exceptions.rate_except import RateAPIError
-from app.infrastructure.repo.base.repository import get_base_repo
+from app.infrastructure.repo.base.repository import SQLALchemyRepo
 from app.infrastructure.repo.orders import OrderRepo
 from app.logger import logger
 from app.services.ext_api import get_current_rate_from_api
@@ -9,7 +9,6 @@ from app.services.ext_api import get_worksheet
 from app.services.schemas import OrderSchema
 from app.utils import timeit
 from gspread import Worksheet
-from sqlalchemy import event
 
 WORKSHEET_ID = 0
 
@@ -49,17 +48,13 @@ def convert_prices_to_rubles(list_orders: list[OrderSchema]) -> None:
 
 
 @timeit
-def update_orders_to_database(pool) -> None:
+def update_orders_to_database(repo: SQLALchemyRepo) -> None:
     """
     Обновляет записи в БД.
-    :param pool: Пул соединений с БД
+    :param repo:
     """
     list_orders: list[OrderSchema] = get_orders_from_sheets()
-
-    with pool() as _session:
-        event.listen(_session, "after_commit", receive_after_flush)
-        repo = get_base_repo(_session).get_repo(OrderRepo)
-        repo.add_orders(orders_list=list_orders)
+    repo.get_repo(OrderRepo).add_orders(orders_list=list_orders)
 
 
 def receive_after_flush(session) -> None:

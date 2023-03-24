@@ -1,0 +1,15 @@
+.Logo {
+  text-align: left;
+}
+
+.Logo-image {
+  height: 8vmin;
+  pointer-events: none;
+  margin-left: 2vmin;
+  margin-top: 2vmin;
+}
+
+
+
+
+

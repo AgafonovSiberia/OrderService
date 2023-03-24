@@ -8,7 +8,7 @@ def create_pool() -> sessionmaker:
     """
     Создаёт SQLAlchemy Engine и возвращает пул подключений
     """
-    engine = create_engine(config.POSTGRES_URL, pool_pre_ping=True, echo=False)
+    engine = create_engine(config.POSTGRES_URL, pool_pre_ping=True, pool_size=30, max_overflow=0)
     return create_session_maker(engine)
 
 
