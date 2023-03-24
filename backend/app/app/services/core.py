@@ -4,8 +4,8 @@ from app.exceptions.rate_except import RateAPIError
 from app.infrastructure.repo.base.repository import get_base_repo
 from app.infrastructure.repo.orders import OrderRepo
 from app.logger import logger
-from app.services.current_rate import get_current_rate_from_api
-from app.services.google_api import get_worksheet
+from app.services.ext_api import get_current_rate_from_api
+from app.services.ext_api import get_worksheet
 from app.services.schemas import OrderSchema
 from app.utils import timeit
 from gspread import Worksheet
@@ -63,6 +63,11 @@ def update_orders_to_database(pool) -> None:
         repo.add_orders(orders_list=list_orders)
 
 
-def receive_after_flush(session):
-    # тут можно дёргать вебсокет для реакта
+def receive_after_flush(session) -> None:
+    """
+    Триггер после коммита всех заказов в БД.
+    В этом месте можно дёргать веб-сокет для фронта.
+    :param session: SQLAlchemy-session
+    """
+
     logger.info("Session committed")

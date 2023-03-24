@@ -1,9 +1,10 @@
-import gspread
-
-from app.config_reader import config
-from gspread.client import BackoffClient
-from gspread.auth import ServiceAccountCredentials, DEFAULT_SCOPES
 from functools import lru_cache
+
+import gspread
+from app.config_reader import config
+from gspread.auth import DEFAULT_SCOPES
+from gspread.auth import ServiceAccountCredentials
+from gspread.client import BackoffClient
 
 
 def create_client() -> gspread.Client:

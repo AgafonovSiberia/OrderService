@@ -3,7 +3,8 @@ from app.config_reader import config
 from app.logger import logger
 from app.templates.order_expire import ORDER_EXPIRE_HEADER
 
-BASE_URL = "https://api.telegram.org/"
+BOT_TELEGRAM_API_BASE_URL = "https://api.telegram.org/"
+SEND_MESSAGE_POSTFIX = "/SendMessage"
 
 
 def emailing_to_admins(message: str):
@@ -12,7 +13,7 @@ def emailing_to_admins(message: str):
 
 
 def send_message(text: str, chat_id: int):
-    url = f"{BASE_URL}bot{config.BOT_TOKEN}/SendMessage"
+    url = f"{BOT_TELEGRAM_API_BASE_URL}bot{config.BOT_TOKEN}{SEND_MESSAGE_POSTFIX}"
     payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML", "chat_type": "private"}
 
     response = requests.post(url=url, data=payload)

@@ -16,7 +16,9 @@ def get_current_rate_from_api(
     date: datetime.date = datetime.date.today(),
 ) -> Decimal:
     """
-    Получает актуальный курс USD через API ЦБ РФ
+    Получает актуальный курс USD через API ЦБ РФ.
+    Если API не смогло вернуть актуальный курс,
+    поднимается исключение RateAPIError
     :return: Decimal
     """
     url = f"{URL_API}?date_req={date.strftime('%d/%m/%Y')}"
