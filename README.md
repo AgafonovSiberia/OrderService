@@ -20,7 +20,7 @@ cd OrderService
 ```
 mv dist.env dev.env
 ```
-5.Заполните файл <code>env.dev</code>
+5.Заполните файл <code>dev.env</code> - <i>смотреть комментарии в файле</i> <code>dev.env</code>
 
 **6. Режимы развёртывания приложения**
 <br>
@@ -30,3 +30,5 @@ mv dist.env dev.env
 <br><br>
 6.2. Для **запуска** Fullstack App выполните команду  ``` make run ```
 <br> Для **остановки** выполните команду ``` make stop ```
+
+
