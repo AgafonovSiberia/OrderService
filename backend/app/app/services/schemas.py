@@ -15,14 +15,3 @@ class OrderSchema(BaseModel):
     @validator("delivery_date", pre=True)
     def parse_date(cls, value):
         return datetime.datetime.strptime(value, "%d.%m.%Y").date()
-
-
-# class OrderFullSchema(OrderSchema):
-#
-#
-#     @validator("price_in_rubles", pre=True)
-#     def convert_valute(cls, value):
-#         return value * get_current_rate_from_api()
-#
-#     class Config:
-#         orm_mode = True
