@@ -1,7 +1,25 @@
 # OrderService - Fullstack WebApp (Flask + React)
 Test work for Unwind Digital
 
-### ЗАПУСК
+### CREDENTIALS
+**ВНИМАНИЕ** прежде чем развернуть приложение, необходимо получить данные авторизации для **TelegramBotAPI** и **GoogleSheetsAPI**
+**1. TelegramBotAPI**
+* Получить [Telegram BotToken](https://core.telegram.org/bots/features#creating-a-new-bot)
+* Получить [ChatID](https://t.me/my_id_bot) пользователей, которые будут получать рассылку от бота.
+
+**2. GoogleSheetsAPI**
+* Создать новый проект в [Google Cloud Platform](https://console.cloud.google.com/)
+* Подключить к проекту **GoogleSheetsAPI** и **GoogleDriveAPI**
+* Создать для проекта **ServiceAccount** и получить **JSON-key**
+* Получить [GoogleServiceAccount](https://habr.com/ru/post/575160/)
+* Дать доступ сервисному аккаунту к вашей GoogleSheet
+* [Примерная инструкция](https://habr.com/ru/post/575160/)
+
+
+
+
+
+### RUN / DEPLOY
 **ВНИМАНИЕ** для развёртывания приложения необходимо установить  <a href="https://docs.docker.com/">Docker</a> и <a href="https://docs.docker.com/compose/">Docker-compose</a>
 1. Перейдите в директорию, в которую планируете клонировать проект
 ```
@@ -16,7 +34,7 @@ git clone https://github.com/AgafonovSiberia/OrderService.git
 ```
 cd OrderService
 ```
-4.Преименуйте файл <code>dist.env</code> в <code>dev.env</code>
+4.Переименуйте файл <code>dist.env</code> в <code>dev.env</code>
 ```
 mv dist.env dev.env
 ```
