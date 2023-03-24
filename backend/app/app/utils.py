@@ -1,6 +1,9 @@
-from app.logger import logger
+import datetime
 import time
-from datetime import timedelta
+
+from app.config_reader import config
+from app.logger import logger
+from pytz import timezone
 
 
 def timeit(func):
@@ -9,8 +12,15 @@ def timeit(func):
         result = func(*args, **kwargs)
         end_time = time.monotonic()
         logger.info(
-            f"{func.__name__} - duration: {timedelta(seconds=end_time - start_time)}"
+            f"{func.__name__} - duration: {datetime.timedelta(seconds=end_time - start_time)}"
         )
         return result
 
     return wrapper
+
+
+def get_today_with_timezone():
+    now = datetime.datetime.now(timezone(config.TIMEZONE))
+    today = datetime.date(now.year, now.month, now.day)
+    print(type(today))
+    return today

@@ -1,5 +1,13 @@
-from typing import Optional, Any, Dict
-from pydantic import BaseModel, BaseSettings, Field, PostgresDsn, RedisDsn, validator
+from typing import Any
+from typing import Dict
+from typing import Optional
+
+from pydantic import BaseModel
+from pydantic import BaseSettings
+from pydantic import Field
+from pydantic import PostgresDsn
+from pydantic import RedisDsn
+from pydantic import validator
 
 
 class ServiceKey(BaseModel):
@@ -16,9 +24,14 @@ class ServiceKey(BaseModel):
 
 
 class Settings(BaseSettings):
-    API_V1_URL: str = Field(default="/api_v1/")
+    API_V1_URL: str = Field(default="/api/")
+
+    BOT_TOKEN: str
+    ID_ADMINS: list[int]
+
     UPDATE_TIMEOUT: int = Field(default=10)
     TIMEZONE: str = Field(default="Europe/Moscow")
+
     GSAPI_ID: str
     GSAPI_SERVICE_KEY: ServiceKey
 
@@ -63,6 +76,12 @@ class Settings(BaseSettings):
         env_file = "./dev.env"
         env_file_encoding = "utf-8"
         env_nested_delimiter = "__"
+
+        @classmethod
+        def parse_env_var(cls, field_name: str, raw_val: str) -> Any:
+            if field_name == "ID_ADMINS":
+                return [int(x) for x in raw_val.split(",")]
+            return cls.json_loads(raw_val)
 
 
 config = Settings()

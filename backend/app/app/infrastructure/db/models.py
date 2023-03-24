@@ -1,6 +1,10 @@
-from sqlalchemy import Column, Integer, Date, DECIMAL, BigInteger
 from app.infrastructure.db.base import Base
-import datetime
+from sqlalchemy import BigInteger
+from sqlalchemy import Column
+from sqlalchemy import Date
+from sqlalchemy import DECIMAL
+from sqlalchemy import Integer
+
 
 class Order(Base):
     __tablename__ = "orders"
@@ -17,5 +21,5 @@ class Order(Base):
             "order_number": self.order_number,
             "price_in_dollars": self.price_in_dollars,
             "price_in_rubles": self.price_in_rubles,
-            "delivery_date": self.delivery_date.strftime("%d.%m.%Y")
+            "delivery_date": self.delivery_date.strftime("%d.%m.%Y"),
         }

@@ -1,9 +1,10 @@
 import datetime
+from decimal import Decimal
+from functools import lru_cache
+from xml.etree.ElementTree import fromstring
 
 import requests
-from decimal import Decimal
-from xml.etree.ElementTree import fromstring
-from functools import lru_cache
+from app.exceptions.rate_except import RateAPIError
 from app.logger import logger
 
 USD_CODE = "R01235"
@@ -13,10 +14,10 @@ URL_API = "https://www.cbr.ru/scripts/XML_daily.asp"
 @lru_cache(maxsize=3)
 def get_current_rate_from_api(
     date: datetime.date = datetime.date.today(),
-) -> Decimal | None:
+) -> Decimal:
     """
     Получает актуальный курс USD через API ЦБ РФ
-    :return: Decimal | None
+    :return: Decimal
     """
     url = f"{URL_API}?date_req={date.strftime('%d/%m/%Y')}"
 
@@ -31,13 +32,13 @@ def get_current_rate_from_api(
     logger.error(
         f"Не удалось получить актуальный курс валют от ЦБ РФ на {date}. {result.status_code}"
     )
-    return None
+    raise RateAPIError(date)
 
 
 def convert_rate_to_decimal(rate: str):
     """
-    Переводит курс доллара из str в Decimal в виде строки
-    :param rate: курс доллара, полученный от API (77,12) в виде строки с ,
+    Переводит курс доллара из str в Decimal
+    :param rate: курс доллара, полученный от API (77,12) в виде строки с " , "
     :return: Decimal('77.12')
     """
     rate_decimal = Decimal(rate.text.replace(",", ".", 1))
