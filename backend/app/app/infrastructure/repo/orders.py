@@ -55,10 +55,13 @@ class OrderRepo(BaseSQLAlchemyRepo):
         отскорированные по дате
         :return: список стоимостей
         """
-        prices_list = self._session.execute(
-            select(Order.price_in_dollars).order_by(desc(Order.delivery_date))
-        )
-        return prices_list.scalars().all()
+        prices_list = self._session.execute(select(Order).order_by(desc(Order.delivery_date)))
+        prices_list = prices_list.scalars().all()
+
+        return [
+            {"date": order.delivery_date.strftime("%d.%m.%Y"), "price": int(order.price_in_dollars)}
+            for order in prices_list
+        ]
 
     def get_expire_orders(self) -> list[Order]:
         """

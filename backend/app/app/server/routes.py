@@ -29,7 +29,7 @@ def get_total_in_dollars() -> Response:
     repo: SQLALchemyRepo = request.environ["repo"]
     total_in_dollars, total_in_rubles = repo.get_repo(OrderRepo).get_total_sum()
     return jsonify(
-        {"total_sum_in_dollars": total_in_dollars, "total_sum_in_rubles": total_in_rubles}
+        [{"total_sum_in_dollars": total_in_dollars, "total_sum_in_rubles": total_in_rubles}]
     )
 
 
@@ -40,6 +40,7 @@ def get_price_dynamic() -> Response:
     """
     repo: SQLALchemyRepo = request.environ["repo"]
     prices_dynamic = repo.get_repo(OrderRepo).get_prices_in_dollars_dynamic()
+
     return prices_dynamic
 
 

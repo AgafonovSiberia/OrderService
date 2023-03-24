@@ -1,12 +1,9 @@
 from app.infrastructure.workflow.celery import celery
+from app.infrastructure.workflow.database_task import DatabaseTask
 from app.services.core import update_orders_to_database
-from sqlalchemy.orm import sessionmaker
-from app.infrastructure.db.factory import create_pool
+from celery.app import task
 
 
-@celery.task
-def update_orders_task():
-    pool: sessionmaker = create_pool()
-    update_orders_to_database(pool)
-
-
+@celery.task(base=DatabaseTask, bind=True)
+def update_orders_task(self: task):
+    update_orders_to_database(self.repo)
