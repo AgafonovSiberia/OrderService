@@ -52,7 +52,6 @@ def convert_prices_to_rubles(list_orders: list[OrderSchema]) -> None:
 def update_orders_to_database(pool) -> None:
     """
     Обновляет записи в БД.
-    Считает значение для поля цена в рублях.
     :param pool: Пул соединений с БД
     """
     list_orders: list[OrderSchema] = get_orders_from_sheets()
@@ -66,7 +65,7 @@ def update_orders_to_database(pool) -> None:
 def receive_after_flush(session) -> None:
     """
     Триггер после коммита всех заказов в БД.
-    В этом месте можно дёргать веб-сокет для фронта.
+    В этом месте можно дёрнуть веб-сокет для фронта.
     :param session: SQLAlchemy-session
     """
 

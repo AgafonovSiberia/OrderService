@@ -38,3 +38,4 @@ exclude = '.*/migrations/.*'
 
 [tool.ruff]
 line-length = 100
+ignore = ["F401"]

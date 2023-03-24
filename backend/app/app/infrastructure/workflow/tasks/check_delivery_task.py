@@ -2,8 +2,8 @@ from app.infrastructure.db.factory import create_pool
 from app.infrastructure.repo.base.repository import SQLALchemyRepo
 from app.infrastructure.repo.orders import OrderRepo
 from app.infrastructure.workflow.celery import celery
-from services.ext_api.tg_bot import emailing_to_admins
-from services.ext_api.tg_bot import render_message_order_expire
+from services.ext_api import emailing_to_admins
+from services.ext_api import render_message_order_expire
 from sqlalchemy.orm import sessionmaker
 
 

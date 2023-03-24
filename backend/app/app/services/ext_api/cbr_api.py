@@ -39,7 +39,7 @@ def get_current_rate_from_api(
 
 def convert_rate_to_decimal(rate: str):
     """
-    Переводит курс доллара из str в Decimal
+    Переводит курс из str в Decimal
     :param rate: курс доллара, полученный от API (77,12) в виде строки с " , "
     :return: Decimal('77.12')
     """
