@@ -44,6 +44,13 @@ def get_price_dynamic() -> Response:
     return prices_dynamic
 
 
+@router.get("/get_expire_orders")
+def get_expire_orders() -> Response:
+    repo: SQLALchemyRepo = request.environ["repo"]
+    expire_orders_list = repo.get_repo(OrderRepo).get_expire_orders()
+    return jsonify([order.to_dict for order in expire_orders_list])
+
+
 @router.get("/check_expire_orders")
 def check_expire_orders() -> Response:
     """

@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Table from '../table/Table'
 import Graph from '../graph/Graph'
 import TableTotal from '../table_total/TableTotal'
-
+import TableExpire from '../table_expire/TableExpire'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -25,6 +25,7 @@ export default function FullWidthGrid() {
         </Grid>
           <Grid xs={10} md={5}>
           <Item><TableTotal /></Item>
+            <Item><TableExpire /></Item>
         </Grid>
         <Grid xs={10} md={7}>
           <Item><Graph /></Item>

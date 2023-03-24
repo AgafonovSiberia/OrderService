@@ -1,11 +1,12 @@
 import time
-from app.services.core import update_orders_to_database
+
 from app.infrastructure.db.factory import create_pool
-from sqlalchemy.orm.session import sessionmaker
 from app.logger import logger
+from app.services.core import update_orders_to_database
+from sqlalchemy.orm.session import sessionmaker
 
 # Quota limits to GoogleSheets APi. Per minute per user per project - 60
-GOOGLE_API_TIMEOUT = 2
+GOOGLE_API_TIMEOUT = 3
 
 
 def script_run():
@@ -18,6 +19,4 @@ def script_run():
 
 
 if __name__ == "__main__":
-    #script_run()
-    while True:
-        print("hello")
+    script_run()
