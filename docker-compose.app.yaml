@@ -20,6 +20,19 @@ services:
       mode: replicated
       replicas: 1
 
+  frontend:
+    build:
+      context: ./frontend/app
+      dockerfile: frontend.dockerfile
+    container_name: frontend-app
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend/app:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
   db:
     image: postgres:15.1
     command: postgres -c config_file=/etc/postgresql.conf
