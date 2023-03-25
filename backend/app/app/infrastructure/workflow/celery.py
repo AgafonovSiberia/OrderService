@@ -15,7 +15,7 @@ celery = Celery(
 
 
 class CeleryConfig:
-    timezone = "Europe/Moscow"
+    timezone = config.TIMEZONE
 
 
 celery.config_from_object(CeleryConfig)

@@ -1,7 +1,7 @@
 from abc import ABC
 
-from app.infrastructure.db.factory import create_pool
-from app.infrastructure.repo.base.repository import SQLALchemyRepo
+from app.infrastructure.db import create_pool
+from app.infrastructure.repo import SQLALchemyRepo
 from celery import Task
 
 

@@ -11,6 +11,10 @@ from sqlalchemy.dialects.postgresql import insert
 
 
 class OrderRepo(BaseSQLAlchemyRepo):
+    """
+    Имплементация паттерна Repository для модели Order
+    """
+
     def add_orders(self, orders_list: list[OrderSchema]) -> None:
         """
         Добавляет/обновляет (upsert) все заказыв БД
@@ -51,9 +55,9 @@ class OrderRepo(BaseSQLAlchemyRepo):
 
     def get_prices_in_dollars_dynamic(self) -> list[Decimal]:
         """
-        Достаёт из БД стоимости заказов,
-        отскорированные по дате
-        :return: список стоимостей
+        Достаёт из БД стоимости заказов в долларах,
+        отсортированные по дате
+        :return: список стоимостей в долларах
         """
         prices_list = self._session.execute(select(Order).order_by(desc(Order.delivery_date)))
         prices_list = prices_list.scalars().all()

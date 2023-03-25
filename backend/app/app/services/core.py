@@ -1,9 +1,8 @@
 from decimal import Decimal
 
 from app.exceptions.rate_except import RateAPIError
-from app.infrastructure.repo.base.repository import SQLALchemyRepo
-from app.infrastructure.repo.orders import OrderRepo
-from app.logger import logger
+from app.infrastructure.repo import OrderRepo
+from app.infrastructure.repo import SQLALchemyRepo
 from app.services.ext_api import get_current_rate_from_api
 from app.services.ext_api import get_worksheet
 from app.services.schemas import OrderSchema
@@ -55,13 +54,3 @@ def update_orders_to_database(repo: SQLALchemyRepo) -> None:
     """
     list_orders: list[OrderSchema] = get_orders_from_sheets()
     repo.get_repo(OrderRepo).add_orders(orders_list=list_orders)
-
-
-def receive_after_flush(session) -> None:
-    """
-    Триггер после коммита всех заказов в БД.
-    В этом месте можно дёрнуть веб-сокет для фронта.
-    :param session: SQLAlchemy-session
-    """
-
-    logger.info("Session committed")

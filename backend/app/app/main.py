@@ -1,5 +1,5 @@
 from app.infrastructure.db.factory import create_pool
-from app.server.middlewares.repositorymiddleware import RepositoryMiddleware
+from app.server.middlewares.repository import RepositoryMiddleware
 from app.server.routes import router
 from flask import Flask
 from flask_cors import CORS
