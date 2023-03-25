@@ -18,4 +18,3 @@ WORKDIR $CODE_PATH
 
 COPY ./backend/app .
 
-ENTRYPOINT ["python3", "-m", "app.script"]
