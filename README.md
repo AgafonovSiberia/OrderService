@@ -1,5 +1,5 @@
 # OrderService - Fullstack WebApp (Flask + React)
-Test work for Unwind Digital
+Work for Каналсервис / Unwind Digital
 <br>
 Реализовано:
 * **Базовое решение:**
@@ -8,14 +8,14 @@ Test work for Unwind Digital
   * Работа с БД PostgreSQL + SQLAlchemy
   * Автоматическое обновление данных в БД (с учётом пересчёта стоимости заказа в рубли по текущуему курсу)
   * Docker/docker-compose
-* **FullStackAPP**
+* **FullStackAPP** (расширение для базового решения)
   * backend - FlaskApp
   * frontend - ReactJS
   * периодические/длинные задачи вынесены в Celery
   * рассылка сообщений о просроченных заказах в Telegram
   (периодически в 9:00 по Мск, либо принудительно через ручку <code>GET 0.0.0.0:9090/api/check_expire_orders</code>
   
-
+____________________________________________
 ### CREDENTIALS
 **ВНИМАНИЕ** прежде чем развернуть приложение, необходимо получить данные авторизации для **TelegramBotAPI** и **GoogleSheetsAPI**
 <br>
@@ -32,9 +32,7 @@ Test work for Unwind Digital
 * Дать доступ сервисному аккаунту к вашей GoogleSheet
 * [Примерная инструкция](https://habr.com/ru/post/575160/)
 
-
-
-
+____________________________________________
 
 ### RUN / DEPLOY
 **ВНИМАНИЕ** для развёртывания приложения необходимо убедиться, что на вашей машине установлены  <a href="https://docs.docker.com/">Docker</a> и <a href="https://docs.docker.com/compose/">Docker compose V2</a>
@@ -68,6 +66,7 @@ mv ../some_folder/dev.env dev.env
 6.2. Для **запуска** Fullstack App выполните команду  ``` make run ```
 <br> Для **остановки** выполните команду ``` make stop ```
 
+____________________________________________
 
 ### REST API
 * <code>GET 0.0.0.0:9090/api/orders</code> - получить список всех заказов
