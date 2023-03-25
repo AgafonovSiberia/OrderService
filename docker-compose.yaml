@@ -5,7 +5,7 @@ services:
     image: server
     build:
       context: .
-      dockerfile: backend/server.Dockerfile
+      dockerfile: backend/server.dockerfile
     command: bash -c "alembic upgrade head && python -m app.main"
     volumes:
       - ./backend/app:/app
@@ -23,7 +23,7 @@ services:
   frontend:
     build:
       context: ./frontend/app
-      dockerfile: frontend.Dockerfile
+      dockerfile: frontend/app/frontend.dockerfile
     ports:
       - '3000:3000'
     volumes:
