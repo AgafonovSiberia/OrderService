@@ -30,7 +30,7 @@ def send_message(text: str, chat_id: int) -> None:
 
     response = requests.post(url=url, data=payload)
     if response.status_code != 200:
-        logger.log(f"Не удалось доставить сообщение. chat_id: {chat_id}")
+        logger.info(f"Не удалось доставить сообщение. chat_id: {chat_id}")
 
 
 def render_message_order_expire(data: list[OrderSchema]) -> str:
