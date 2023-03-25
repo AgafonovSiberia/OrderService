@@ -6,6 +6,7 @@ from xml.etree.ElementTree import fromstring
 import requests
 from app.exceptions.rate_except import RateAPIError
 from app.logger import logger
+from app.utils import get_today_with_timezone
 
 USD_CODE = "R01235"
 URL_API = "https://www.cbr.ru/scripts/XML_daily.asp"
@@ -13,7 +14,7 @@ URL_API = "https://www.cbr.ru/scripts/XML_daily.asp"
 
 @lru_cache(maxsize=3)
 def get_current_rate_from_api(
-    date: datetime.date = datetime.date.today(),
+    date: datetime.date = get_today_with_timezone(),
 ) -> Decimal:
     """
     Получает актуальный курс USD через API ЦБ РФ.
