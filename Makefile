@@ -1,8 +1,8 @@
 run:
-	docker compose -f docker-compose.app.yaml up --build
+	docker compose up --build
 
 stop:
-	docker compose -f docker-compose.app.yaml up --build
+	docker compose up stop
 
 run_base:
 	docker compose -f docker-compose.base.yaml up --build
