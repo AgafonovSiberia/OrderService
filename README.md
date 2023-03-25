@@ -13,6 +13,7 @@ Test work for Unwind Digital
 * Подключить к проекту **GoogleSheetsAPI** и **GoogleDriveAPI**
 * Создать для проекта **ServiceAccount** и получить **JSON-key**
 * Получить [GoogleServiceAccount](https://habr.com/ru/post/575160/)
+* Создать таблицу и заполнить её (либо, если вам был передан **env.dev** и предоставлены права Редактора, воспользоваться готовой [TestTable](https://docs.google.com/spreadsheets/d/1QThPLQHXtqHGG4OZ07zH7vdxsd7_ZotuWgXZdA3h5e4/edit#gid=0)
 * Дать доступ сервисному аккаунту к вашей GoogleSheet
 * [Примерная инструкция](https://habr.com/ru/post/575160/)
 
@@ -35,9 +36,11 @@ git clone https://github.com/AgafonovSiberia/OrderService.git
 ```
 cd OrderService
 ```
-4.Переименуйте файл <code>dist.env</code> в <code>dev.env</code>
+4.Переименуйте файл <code>dist.env</code> в <code>dev.env</code> (либо скопируйте **env.dev** в директорию проекта, если он был выдан вам ранее)
 ```
 mv dist.env dev.env
+либо
+mv ../some_folder/dev.env dev.env
 ```
 5.Заполните файл <code>dev.env</code> - <i>смотреть комментарии в файле</i> <code>dev.env</code>
 
