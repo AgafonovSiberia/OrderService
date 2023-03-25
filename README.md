@@ -21,7 +21,7 @@ Test work for Unwind Digital
 
 
 ### RUN / DEPLOY
-**ВНИМАНИЕ** для развёртывания приложения необходимо убедиться, что на вашей машине установлены  <a href="https://docs.docker.com/">Docker</a> и <a href="https://docs.docker.com/compose/">Docker-compose</a>
+**ВНИМАНИЕ** для развёртывания приложения необходимо убедиться, что на вашей машине установлены  <a href="https://docs.docker.com/">Docker</a> и <a href="https://docs.docker.com/compose/">Docker compose V2</a>
 1. Перейдите в директорию, в которую планируете клонировать проект
 ```
 mkdir some_dir
