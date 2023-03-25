@@ -3,6 +3,7 @@ Test work for Unwind Digital
 
 ### CREDENTIALS
 **ВНИМАНИЕ** прежде чем развернуть приложение, необходимо получить данные авторизации для **TelegramBotAPI** и **GoogleSheetsAPI**
+<br>
 **1. TelegramBotAPI**
 * Получить [Telegram BotToken](https://core.telegram.org/bots/features#creating-a-new-bot)
 * Получить [ChatID](https://t.me/my_id_bot) пользователей, которые будут получать рассылку от бота.
