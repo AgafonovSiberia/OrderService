@@ -1,5 +1,20 @@
 # OrderService - Fullstack WebApp (Flask + React)
 Test work for Unwind Digital
+<br>
+Реализовано:
+* **Базовое решение:**
+  * Получение данных из таблицы по GoogleSheetsAPI
+  * Получение текущего курса доллара по API ЦБ РФ
+  * Работа с БД PostgreSQL + SQLAlchemy
+  * Автоматическое обновление данных в БД (с учётом пересчёта стоимости заказа в рубли по текущуему курсу)
+  * Docker/docker-compose
+* **FullStackAPP**
+  * backend - FlaskApp
+  * frontend - ReactJS
+  * периодические/длинные задачи вынесены в Celery
+  * рассылка сообщений о просроченных заказах в Telegram
+  (периодически в 9:00 по Мск, либо принудительно через ручку <code>GET 0.0.0.0:9090/api/check_expire_orders</code>
+  
 
 ### CREDENTIALS
 **ВНИМАНИЕ** прежде чем развернуть приложение, необходимо получить данные авторизации для **TelegramBotAPI** и **GoogleSheetsAPI**
